@@ -10,20 +10,21 @@ void pollingExample() {
 	wiringPiSetup(); //If you want to use the GPIO numberings instead, change this call to wiringPiSetupGpio();
 	pinMode(pinNum, INPUT);
 	
-	
+	// Repeatedly read the pin to check if the button was pressed (HIGH value) or not (LOW value)
 	while (true) {
 		int pinRead = digitalRead(pinNum);
-		if (pinRead == 0) {
+		if (pinRead == 0) { // Button was not pressed
 			std::cout<< "Button not Pressed" << std::endl;
-		} else {
+		} else { // Button was pressed
 			std::cout<< "YOU PRESSED IT" << std::endl;
 		}
-		sleep(1);
+		sleep(1); // Sleep for a second so we don't constantly read
 	}
 	
 }
 
-void onInterrupt() {
+void onInterrupt() { 
+	// This method is called when the ISR detects a rising edge
 	std::cout<< "YOU PRESSED IT" << std::endl;
 }
 
@@ -31,8 +32,10 @@ void interruptExample() {
 	int pinNum = 21;
 	
 	wiringPiSetup();
+	
+	// Create an ISR on the pin, which will call the onInterrupt method when it detects a rising edge
 	wiringPiISR(pinNum, INT_EDGE_RISING, &onInterrupt);
-	pinMode(pinNum, INPUT);
+	pinMode(pinNum, INPUT); // Technically don't need this call I believe, but it doesn't hurt
 	
 }
 
@@ -44,7 +47,7 @@ void blinkExample() {
 	
 	int currentVal = 0;
 	while (true) {
-		currentVal = ((currentVal + 1) % 2);
+		currentVal = ((currentVal + 1) % 2); // Toggle the value between 0 and 1
 		digitalWrite(pinNum, currentVal);
 		sleep(1);
 	}
@@ -54,8 +57,8 @@ void pwmExample() {
 	int pin = 29;
 	wiringPiSetup();
 	
-	softPwmCreate(pin, 0, 100);
-	softPwmWrite(pin, 30);
+	softPwmCreate(pin, 0, 100); // Create a PWM that ranges from 0 to 100 on pin 29
+	softPwmWrite(pin, 30); // Set the PWM to 30, which is a 30% duty cycle in our case. This creates a dim effect
 
 }
 
@@ -69,9 +72,8 @@ int main() {
 	
 	//pwmExample();
 	
-	while(true) {
-		sleep(1);
-		
+	while(true) { // Keeps the program running for the examples that do not have a while loop of their own
+		sleep(1); 
 	}
 	
 	return 0;

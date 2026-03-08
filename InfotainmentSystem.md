@@ -4,3 +4,9 @@ You will be creating an Car Dashboard Infotainment System, which will allow user
 
 Your project should include at least three features, ideally more, that showcase your ability to have hardware and software communicate. Your dashboard should be styled an laid out in some way you think the end users would find useful. Think about how a user would actually interact with them and where it makes sense to place them. Also give it your own pizzazz, this should be something you think would look cool in a car!
 
+### gpioExamples.cpp
+This file contains an examples of how to use wiringPi in different ways to change the state of the circuit. 
+
+### QT-Example
+This contains example QT files that show how we have used wiringPi in tandem with QT framework. `QT-README.md` contains more information on this part of the examples.
+
